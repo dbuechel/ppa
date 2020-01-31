@@ -25,8 +25,9 @@ namespace PPA
 				Dock = DockStyle.Fill
 			};
 
-			browser.LoadError += Browser_LoadError;
 			browser.DisplayHandler = new DisplayHandler(this);
+			browser.LifeSpanHandler = new LifeSpanHandler();
+			browser.LoadError += Browser_LoadError;
 			browser.MenuHandler = new ContextMenuHandler();
 			browser.TitleChanged += Browser_TitleChanged;
 
