@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Windows.Forms;
 using CefSharp;
 
-namespace PortalPageApplication.Handlers
+namespace PPA.Handlers
 {
 	internal class DisplayHandler : IDisplayHandler
 	{

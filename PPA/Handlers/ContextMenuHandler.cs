@@ -1,6 +1,6 @@
 ﻿using CefSharp;
 
-namespace PortalPageApplication.Handlers
+namespace PPA.Handlers
 {
 	internal class ContextMenuHandler : IContextMenuHandler
 	{

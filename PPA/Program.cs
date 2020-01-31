@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace PortalPageApplication
+namespace PPA
 {
 	static class Program
 	{

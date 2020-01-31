@@ -1,4 +1,4 @@
-﻿namespace PortalPageApplication
+﻿namespace PPA
 {
 	partial class MainWindow
 	{

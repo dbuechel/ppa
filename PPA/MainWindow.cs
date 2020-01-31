@@ -4,9 +4,9 @@ using System.Drawing;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.WinForms;
-using PortalPageApplication.Handlers;
+using PPA.Handlers;
 
-namespace PortalPageApplication
+namespace PPA
 {
 	public partial class MainWindow : Form
 	{
