@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Windows.Forms;
@@ -43,9 +42,18 @@ namespace PPA.Handlers
 				{
 					task.Result.Content.ReadAsStreamAsync().ContinueWith(stream =>
 					{
-						if (stream.IsCompleted && Path.GetExtension(request.RequestUri.AbsolutePath).Equals(".ico", StringComparison.OrdinalIgnoreCase))
+						if (stream.IsCompleted)
 						{
-							form.Invoke(new Action(() => form.Icon = new Icon(stream.Result)));
+							form.Invoke(new Action(() =>
+							{
+								try
+								{
+									form.Icon = new Icon(stream.Result);
+								}
+								catch
+								{
+								}
+							}));
 						}
 					});
 				}
