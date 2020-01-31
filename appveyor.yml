@@ -1,0 +1,17 @@
+version: '1.0.0.{build}'
+image: Windows
+configuration: Release
+platform: x86
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version} ($(platform))'
+build_script:
+ - msbuild /verbosity:minimal "PortalPageApplication.sln"
+test: off
+artifacts:
+ - path: PortalPageApplication\bin\$(platform)\$(configuration)
+   name: 'PortalPageApplication_$(appveyor_build_version)'
+   type: zip
