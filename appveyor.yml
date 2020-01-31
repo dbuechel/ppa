@@ -1,5 +1,5 @@
 version: '1.0.0.{build}'
-image: Windows
+image: Visual Studio 2017
 configuration: Release
 platform: x86
 assembly_info:
