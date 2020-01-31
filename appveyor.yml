@@ -11,9 +11,9 @@ assembly_info:
 before_build:
  - nuget restore
 build_script:
- - msbuild /verbosity:minimal "PortalPageApplication.sln"
+ - msbuild /verbosity:minimal "PPA.sln"
 test: off
 artifacts:
- - path: PortalPageApplication\bin\$(platform)\$(configuration)
-   name: 'PortalPageApplication_$(appveyor_build_version)'
+ - path: PPA\bin\$(platform)\$(configuration)
+   name: 'PPA_$(appveyor_build_version)'
    type: zip
