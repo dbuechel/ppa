@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http;
 using System.Windows.Forms;
 using CefSharp;
+using CefSharp.Enums;
+using CefSharp.Structs;
 
 namespace PPA.Handlers
 {
 	internal class DisplayHandler : IDisplayHandler
 	{
-		private Form form;
-		private HttpClient httpClient;
+		private readonly Form form;
 
 		internal DisplayHandler(Form form)
 		{
 			this.form = form;
-			this.httpClient = new HttpClient();
 		}
 
 		public void OnAddressChanged(IWebBrowser chromiumWebBrowser, AddressChangedEventArgs addressChangedArgs)
@@ -27,6 +26,11 @@ namespace PPA.Handlers
 		}
 
 		public bool OnConsoleMessage(IWebBrowser chromiumWebBrowser, ConsoleMessageEventArgs consoleMessageArgs)
+		{
+			return false;
+		}
+
+		public bool OnCursorChange(IWebBrowser chromiumWebBrowser, IBrowser browser, IntPtr cursor, CursorType type, CursorInfo customCursorInfo)
 		{
 			return false;
 		}
