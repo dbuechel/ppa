@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.Linq;
+using System.Net.Http;
 using System.Windows.Forms;
 using CefSharp;
 using CefSharp.Enums;
@@ -10,10 +13,12 @@ namespace PPA.Handlers
 	internal class DisplayHandler : IDisplayHandler
 	{
 		private readonly Form form;
+		private readonly HttpClient httpClient;
 
 		internal DisplayHandler(Form form)
 		{
 			this.form = form;
+			this.httpClient = new HttpClient();
 		}
 
 		public void OnAddressChanged(IWebBrowser chromiumWebBrowser, AddressChangedEventArgs addressChangedArgs)
@@ -37,6 +42,29 @@ namespace PPA.Handlers
 
 		public void OnFaviconUrlChange(IWebBrowser chromiumWebBrowser, IBrowser browser, IList<string> urls)
 		{
+			var request = new HttpRequestMessage(HttpMethod.Get, urls.First());
+			var response = httpClient.SendAsync(request).ContinueWith(task =>
+			{
+				if (task.IsCompleted && task.Result.IsSuccessStatusCode)
+				{
+					task.Result.Content.ReadAsStreamAsync().ContinueWith(stream =>
+					{
+						if (stream.IsCompleted)
+						{
+							form.Invoke(new Action(() =>
+							{
+								try
+								{
+									form.Icon = new Icon(stream.Result);
+								}
+								catch
+								{
+								}
+							}));
+						}
+					});
+				}
+			});
 		}
 
 		public void OnFullscreenModeChange(IWebBrowser chromiumWebBrowser, IBrowser browser, bool fullscreen)
