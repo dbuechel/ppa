@@ -22,13 +22,14 @@ namespace PPA
 			var url = ConfigurationManager.AppSettings["StartUrl"];
 			var browser = new ChromiumWebBrowser(url)
 			{
-				Dock = DockStyle.Fill
+				Dock = DockStyle.Fill,
+				DisplayHandler = new DisplayHandler(this),
+				DragHandler = new DragHandler(),
+				LifeSpanHandler = new LifeSpanHandler(),
+				MenuHandler = new ContextMenuHandler()
 			};
 
-			browser.DisplayHandler = new DisplayHandler(this);
-			browser.LifeSpanHandler = new LifeSpanHandler();
 			browser.LoadError += Browser_LoadError;
-			browser.MenuHandler = new ContextMenuHandler();
 			browser.TitleChanged += Browser_TitleChanged;
 
 			Height = Screen.PrimaryScreen.WorkingArea.Height;
